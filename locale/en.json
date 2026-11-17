@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Security scan triage",
-    "description": "Adds a security triage agent preset and the scan-triage skill: triage Nmap and other scan results, vulnerability reports, alerts and logs with risk grading, false-positive checks, and remediation and retest guidance. Includes an Nmap XML summary script and a practice sample. Defensive use only; it does not run scans or attacks."
+    "title": "QiQi security triage",
+    "description": "Adds the QiQi security triage agent preset and the scan-triage skill: triage Nmap and other scan results, vulnerability reports, alerts and logs with risk grading, false-positive checks, and remediation and retest guidance. Includes an Nmap XML summary script and a practice sample. Defensive use only; it does not run scans or attacks."
   }
 }

@@ -1,12 +1,12 @@
-// dsh-scan-triage 入口：把 skills/scan-triage 注册为按需加载的技能。
+// qiqi-scan-triage 入口：把 skills/scan-triage 注册为按需加载的技能。
 //
-// 「安全研判」Agent 预设由 cordis.patch.yml 声明，不经过这里。
+// 「QiQi的安全研判」Agent 预设由 cordis.patch.yml 声明，不经过这里。
 // 本文件只在 apply() 中读取随包的 SKILL.md，不联网、不写文件、不启动进程。
 import { readFileSync } from 'node:fs'
 import { dirname, join, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-export const name = 'dsh-scan-triage'
+export const name = 'qiqi-scan-triage'
 export const inject = ['skills']
 
 const SKILL_NAME = 'scan-triage'
@@ -51,6 +51,6 @@ export function apply(ctx) {
         content: body,
         resourceBase: { kind: 'directory', path: skillDir.split(sep).join('/') },
       }),
-    'dsh-scan-triage.skill',
+    'qiqi-scan-triage.skill',
   )
 }

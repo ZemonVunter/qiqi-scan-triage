@@ -1,7 +1,7 @@
 {
-  "name": "dsh-scan-triage",
-  "version": "0.1.1",
-  "description": "安全研判 Agent 预设 + scan-triage 技能：研判 Nmap 等扫描结果、漏洞报告、告警与日志，给出风险分级、误报甄别、处置与复测建议。仅限防御用途。",
+  "name": "qiqi-scan-triage",
+  "version": "0.1.2",
+  "description": "QiQi的安全研判 Agent 预设 + scan-triage 技能：研判 Nmap 等扫描结果、漏洞报告、告警与日志，给出风险分级、误报甄别、处置与复测建议。仅限防御用途。",
   "keywords": [
     "dsh",
     "dsh-plugin",
@@ -48,11 +48,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ZemonVunter/dsh-scan-triage.git"
+    "url": "git+https://github.com/ZemonVunter/qiqi-scan-triage.git"
   },
-  "homepage": "https://github.com/ZemonVunter/dsh-scan-triage#readme",
+  "homepage": "https://github.com/ZemonVunter/qiqi-scan-triage#readme",
   "bugs": {
-    "url": "https://github.com/ZemonVunter/dsh-scan-triage/issues"
+    "url": "https://github.com/ZemonVunter/qiqi-scan-triage/issues"
   },
   "dsh": {
     "manifestVersion": 1,

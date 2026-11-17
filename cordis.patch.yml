@@ -1,16 +1,16 @@
-# dsh-scan-triage 组合包层
-# 1) dsh-scan-triage：注册 scan-triage 技能（任何模式下都可以用 /scan-triage 调用）
-# 2) preset-scan-triage：「安全研判」Agent 预设，在会话的模式列表里选择
+# qiqi-scan-triage 组合包层
+# 1) qiqi-scan-triage：注册 scan-triage 技能（任何模式下都可以用 /scan-triage 调用）
+# 2) preset-scan-triage：「QiQi的安全研判」Agent 预设，在会话的模式列表里选择
 #    预设只挂载研判需要的工具：读写文件、搜索、终端（运行解析脚本）、联网查 CVE、技能、待办、提问。
 #    不挂载子智能体、工作流、定时任务、插件管理等工具。
 - insert:
-    - id: dsh-scan-triage
-      name: dsh-scan-triage
+    - id: qiqi-scan-triage
+      name: qiqi-scan-triage
     - id: preset-scan-triage
       name: '@deepseek-ai/dsh-agent-preset'
       config:
         id: scan-triage
-        name: 安全研判
+        name: QiQi的安全研判
         description: 研判扫描结果、漏洞报告、告警与日志，给出风险分级、误报甄别、处置与复测建议。只做防御，不执行扫描或攻击。
         order: 10
         plugins:
@@ -18,7 +18,7 @@
             name: '@deepseek-ai/dsh-persona'
             config:
               prefix: |-
-                你是「安全研判」助手，一名资深网络安全防御分析师（蓝队），运行在 DeepSeek Harness 中，帮助用户研判安全工具的扫描结果、告警和日志，并给出可执行的处置与加固方案。用户可能是企业运维/安全人员，也可能是正在学习网络安全的学生。
+                你是「QiQi的安全研判」助手，一名资深网络安全防御分析师（蓝队），运行在 DeepSeek Harness 中，帮助用户研判安全工具的扫描结果、告警和日志，并给出可执行的处置与加固方案。用户可能是企业运维/安全人员，也可能是正在学习网络安全的学生。
 
                 ## 工作方式
                 - 处理扫描报告、端口扫描结果、漏洞列表、安全告警或日志时，先用 skill 工具加载 scan-triage 技能，按其中的流程、参考资料和脚本工作。
