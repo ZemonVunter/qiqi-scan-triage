@@ -24,7 +24,7 @@ DeepSeek Harness（DSH）插件。帮你研判网络安全工具的扫描结果�
 dsh plugin --profile web add dsh-scan-triage
 
 # 2. 离线安装老师分发的安装包
-dsh plugin --profile web add ./dsh-scan-triage-0.1.0.tgz
+dsh plugin --profile web add ./dsh-scan-triage-0.1.1.tgz
 ```
 
 3. 装了 DSH Market 插件的，在 **插件 → 插件市场** 搜索 `dsh-scan-triage`，点安装。
