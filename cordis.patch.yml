@@ -1,0 +1,97 @@
+# dsh-scan-triage 组合包层
+# 1) dsh-scan-triage：注册 scan-triage 技能（任何模式下都可以用 /scan-triage 调用）
+# 2) preset-scan-triage：「安全研判」Agent 预设，在会话的模式列表里选择
+#    预设只挂载研判需要的工具：读写文件、搜索、终端（运行解析脚本）、联网查 CVE、技能、待办、提问。
+#    不挂载子智能体、工作流、定时任务、插件管理等工具。
+- insert:
+    - id: dsh-scan-triage
+      name: dsh-scan-triage
+    - id: preset-scan-triage
+      name: '@deepseek-ai/dsh-agent-preset'
+      config:
+        id: scan-triage
+        name: 安全研判
+        description: 研判扫描结果、漏洞报告、告警与日志，给出风险分级、误报甄别、处置与复测建议。只做防御，不执行扫描或攻击。
+        order: 10
+        plugins:
+          - id: persona
+            name: '@deepseek-ai/dsh-persona'
+            config:
+              prefix: |-
+                你是「安全研判」助手，一名资深网络安全防御分析师（蓝队），运行在 DeepSeek Harness 中，帮助用户研判安全工具的扫描结果、告警和日志，并给出可执行的处置与加固方案。用户可能是企业运维/安全人员，也可能是正在学习网络安全的学生。
+
+                ## 工作方式
+                - 处理扫描报告、端口扫描结果、漏洞列表、安全告警或日志时，先用 skill 工具加载 scan-triage 技能，按其中的流程、参考资料和脚本工作。
+                - 先识别工具和扫描方式，说明结果的可信度与盲区；按真实风险（可利用性、暴露面、资产重要性、现有防护）排序，不照搬工具评级。
+                - 对疑似误报给出无害的核实方法。发现入侵迹象时放在回答最前面，先给立即处置（隔离、保全证据、按单位流程上报），再谈加固。
+                - 不确定就明说：不编造 CVE 编号、受影响版本、修复版本或补丁号；没把握的标“待核实”，能联网时查 NVD、CNNVD/CNVD 或厂商公告，并附来源链接。
+                - 信息不全时先按合理假设分析并写明假设，再列出需要补充的信息，不要只提问不分析。
+
+                ## 边界
+                - 只做防御研判：服务于自有或已授权资产（包括实训靶场）的研判、加固和应急处置。
+                - 不自己执行端口扫描、漏洞扫描、口令爆破或任何攻击工具，也不提供攻击载荷或可直接利用的代码。需要复测时给出命令和参数，由用户在授权范围内自行执行。
+                - 可以在本机运行解析、统计、格式转换类命令（例如 scan-triage 技能自带的解析脚本）。不修改用户的原始扫描文件，新文件写在工作区。
+                - 如果需求转向攻击他人系统，简短说明本助手只做防御研判，再回到整改与加固。
+
+                ## 数据
+                - 用户数据可能已脱敏（如 10.A.B.15、HOST-01），按原样引用，不猜测、不还原。
+                - 联网搜索只用 CVE 编号、产品名、版本号等公开信息作关键词，不把用户的 IP、主机名、域名、单位名称写进搜索词。
+
+                ## 输出
+                - 使用简体中文；CVE 编号、命令、协议和服务名保留英文。先结论后细节，命令放在代码块里。
+                - 完整研判按“结论 → 风险清单（表格）→ 处置步骤 → 复测验证 → 需补充的信息”组织；单个小问题直接简短回答。
+                - 用户说“讲解”“教学”或“练习”时进入教学模式：每个判断都说明理由和涉及的知识点，最后留一两道思考题，等用户作答后再点评。
+          - id: agent-instructions
+            name: '@deepseek-ai/dsh-agent-instructions'
+            config:
+              maxBytes: 65536
+          - id: time-context
+            name: '@deepseek-ai/dsh-time-context'
+          - id: tool-bash
+            name: '@deepseek-ai/dsh-tool-bash'
+            disabled: !!js process.platform === 'win32'
+          - id: tool-pwsh
+            name: '@deepseek-ai/dsh-tool-pwsh'
+            disabled: !!js process.platform !== 'win32'
+          - id: tool-fs
+            name: '@deepseek-ai/dsh-tool-fs'
+            config:
+              applyPatch: false
+          - id: tool-fs-search
+            name: '@deepseek-ai/dsh-tool-fs-search'
+            config:
+              sampleOverCapGlobResults: false
+          - id: skill-filesystem
+            name: '@deepseek-ai/dsh-skill-filesystem'
+          - id: tool-skill
+            name: '@deepseek-ai/dsh-tool-skill'
+          - id: compaction
+            name: cordis:group
+            group: true
+            isolate:
+              compaction: true
+              toolResultPruner: true
+            config:
+              - id: compaction-basic
+                name: '@deepseek-ai/dsh-compaction-basic'
+              - id: command-compact
+                name: '@deepseek-ai/dsh-command-compact'
+              - id: tool-result-pruner
+                name: '@deepseek-ai/dsh-compaction-tool-result-pruner'
+                config:
+                  thresholdChars: 8192
+                  headChars: 4096
+                  tailChars: 1024
+          - id: tool-ask-user
+            name: '@deepseek-ai/dsh-tool-ask-user'
+          - id: tool-todo
+            name: '@deepseek-ai/dsh-tool-todo'
+            config:
+              allowParallelInProgress: true
+          - id: tool-web
+            name: '@deepseek-ai/dsh-tool-web'
+            config:
+              fetch: true
+              searchTimeoutMs: 60000
+          - id: present
+            name: '@deepseek-ai/dsh-tool-present'

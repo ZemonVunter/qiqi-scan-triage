@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- 练习样例：虚构的实训网段 192.168.56.0/24，不对应任何真实主机 -->
+<!-- Nmap 7.95 scan initiated Tue Nov 17 10:11:48 2026 as: nmap -sS -sU -sV -O -p T:1-65535,U:53,123,161 -&#45;script default,smb-vuln-ms17-010 -oX lab-scan.xml 192.168.56.0/24 -->
+<nmaprun scanner="nmap" args="nmap -sS -sU -sV -O -p T:1-65535,U:53,123,161 --script default,smb-vuln-ms17-010 -oX lab-scan.xml 192.168.56.0/24" start="1794881508" startstr="Tue Nov 17 10:11:48 2026" version="7.95" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
+<scaninfo type="udp" protocol="udp" numservices="3" services="53,123,161"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.10" addrtype="ipv4"/>
+<address addr="08:00:27:3A:10:01" addrtype="mac" vendor="PCS Systemtechnik/Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1794881520" endtime="1794883150"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.10" addrtype="ipv4"/>
+<address addr="08:00:27:3A:10:01" addrtype="mac" vendor="PCS Systemtechnik/Oracle VirtualBox virtual NIC"/>
+<hostnames>
+<hostname name="web01.lab.local" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="65532">
+<extrareasons reason="reset" count="65532" proto="tcp" ports="1-21,23-79,81-3305,3307-65535"/>
+</extraports>
+<port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ssh" product="OpenSSH" version="7.4" extrainfo="protocol 2.0" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:7.4</cpe></service><script id="ssh-hostkey" output="&#xa;  2048 3a:4f:91:0c:6e:21:aa:7d:5b:13:c2:9e:40:88:f1:2d (RSA)&#xa;  256 9b:12:7c:e0:44:af:31:5d:8e:61:2a:b7:0f:c3:d5:19 (ECDSA)"/></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Apache httpd" version="2.4.6" extrainfo="(CentOS) PHP/5.4.16" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.4.6</cpe></service><script id="http-title" output="Lab Portal &#x2013; Login"><elem key="title">Lab Portal &#x2013; Login</elem></script><script id="http-server-header" output="Apache/2.4.6 (CentOS) PHP/5.4.16"><elem>Apache/2.4.6 (CentOS) PHP/5.4.16</elem></script></port>
+<port protocol="tcp" portid="3306"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="mysql" product="MySQL" version="5.7.33" method="probed" conf="10"><cpe>cpe:/a:mysql:mysql:5.7.33</cpe></service><script id="mysql-info" output="&#xa;  Protocol: 10&#xa;  Version: 5.7.33&#xa;  Status: Autocommit&#xa;  Auth Plugin Name: mysql_native_password"/></port>
+<port protocol="udp" portid="53"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="domain" method="table" conf="3"/></port>
+<port protocol="udp" portid="123"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="ntp" method="table" conf="3"/></port>
+<port protocol="udp" portid="161"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="snmp" method="table" conf="3"/></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="22"/>
+<osmatch name="Linux 3.10 - 4.11" accuracy="95" line="67894"><osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="3.X" accuracy="95"/></osmatch>
+<osmatch name="Linux 3.2 - 4.9" accuracy="92" line="65901"><osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="4.X" accuracy="92"/></osmatch>
+</os>
+<times srtt="412" rttvar="190" to="100000"/>
+</host>
+<host starttime="1794881520" endtime="1794883155"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.20" addrtype="ipv4"/>
+<address addr="08:00:27:3A:20:02" addrtype="mac" vendor="PCS Systemtechnik/Oracle VirtualBox virtual NIC"/>
+<hostnames>
+<hostname name="fs01.lab.local" type="PTR"/>
+</hostnames>
+<ports><extraports state="filtered" count="65531">
+<extrareasons reason="no-response" count="65531" proto="tcp" ports="1-134,136-138,140-444,446-3388,3390-65535"/>
+</extraports>
+<port protocol="tcp" portid="135"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="netbios-ssn" product="Microsoft Windows netbios-ssn" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="microsoft-ds" product="Windows Server 2008 R2 Standard 7601 Service Pack 1 microsoft-ds" extrainfo="workgroup: LAB" hostname="FS01" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows_server_2008:r2:sp1</cpe></service></port>
+<port protocol="tcp" portid="3389"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="ms-wbt-server" product="Microsoft Terminal Services" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service><script id="ssl-cert" output="Subject: commonName=FS01.lab.local&#xa;Not valid before: 2026-05-02T08:14:22&#xa;Not valid after:  2026-11-01T08:14:22"/></port>
+<port protocol="udp" portid="53"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="domain" method="table" conf="3"/></port>
+<port protocol="udp" portid="123"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="ntp" method="table" conf="3"/></port>
+<port protocol="udp" portid="161"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="snmp" method="table" conf="3"/></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="135"/>
+<osmatch name="Microsoft Windows Server 2008 R2 SP1" accuracy="96" line="83411"><osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2008" accuracy="96"/></osmatch>
+</os>
+<hostscript><script id="smb-vuln-ms17-010" output="&#xa;  VULNERABLE:&#xa;  Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)&#xa;    State: VULNERABLE&#xa;    IDs:  CVE:CVE-2017-0143&#xa;    Risk factor: HIGH&#xa;      A critical remote code execution vulnerability exists in Microsoft SMBv1&#xa;       servers (ms17-010).&#xa;    References:&#xa;      https://technet.microsoft.com/en-us/library/security/ms17-010.aspx&#xa;      https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0143&#xa;"/><script id="smb-security-mode" output="&#xa;  account_used: guest&#xa;  authentication_level: user&#xa;  challenge_response: supported&#xa;  message_signing: disabled (dangerous, but default)"/></hostscript>
+<times srtt="633" rttvar="250" to="100000"/>
+</host>
+<host starttime="1794881520" endtime="1794883140"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.30" addrtype="ipv4"/>
+<address addr="08:00:27:3A:30:03" addrtype="mac" vendor="PCS Systemtechnik/Oracle VirtualBox virtual NIC"/>
+<hostnames>
+<hostname name="cache01.lab.local" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="65533">
+<extrareasons reason="reset" count="65533" proto="tcp" ports="1-21,23-6378,6380-65535"/>
+</extraports>
+<port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ssh" product="OpenSSH" version="8.2p1 Ubuntu 4ubuntu0.5" extrainfo="Ubuntu Linux; protocol 2.0" ostype="Linux" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:8.2p1</cpe><cpe>cpe:/o:linux:linux_kernel</cpe></service></port>
+<port protocol="tcp" portid="6379"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="redis" product="Redis key-value store" version="4.0.9" method="probed" conf="10"/></port>
+<port protocol="udp" portid="53"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="domain" method="table" conf="3"/></port>
+<port protocol="udp" portid="123"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="ntp" method="table" conf="3"/></port>
+<port protocol="udp" portid="161"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="snmp" method="table" conf="3"/></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="22"/>
+<osmatch name="Linux 4.15 - 5.19" accuracy="97" line="69588"><osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="5.X" accuracy="97"/></osmatch>
+</os>
+<times srtt="390" rttvar="160" to="100000"/>
+</host>
+<host starttime="1794881520" endtime="1794883220"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.40" addrtype="ipv4"/>
+<address addr="08:00:27:3A:40:04" addrtype="mac" vendor="PCS Systemtechnik/Oracle VirtualBox virtual NIC"/>
+<hostnames>
+<hostname name="plc-gw.lab.local" type="PTR"/>
+</hostnames>
+<ports><extraports state="filtered" count="65532">
+<extrareasons reason="no-response" count="65532" proto="tcp" ports="1-79,81-101,103-501,503-65535"/>
+</extraports>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="lighttpd" version="1.4.35" method="probed" conf="10"><cpe>cpe:/a:lighttpd:lighttpd:1.4.35</cpe></service><script id="http-title" output="Gateway Configuration"><elem key="title">Gateway Configuration</elem></script></port>
+<port protocol="tcp" portid="102"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="iso-tsap" method="table" conf="3"/></port>
+<port protocol="tcp" portid="502"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="mbap" method="table" conf="3"/></port>
+<port protocol="udp" portid="53"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="domain" method="table" conf="3"/></port>
+<port protocol="udp" portid="123"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="ntp" method="table" conf="3"/></port>
+<port protocol="udp" portid="161"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="snmp" method="table" conf="3"/></port>
+</ports>
+<times srtt="702" rttvar="301" to="100000"/>
+</host>
+<host starttime="1794881520" endtime="1794883235"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.56.50" addrtype="ipv4"/>
+<address addr="08:00:27:3A:50:05" addrtype="mac" vendor="PCS Systemtechnik/Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+<ports><extraports state="closed" count="65533">
+<extrareasons reason="reset" count="65533" proto="tcp" ports="1-22,24-8442,8444-65535"/>
+</extraports>
+<port protocol="tcp" portid="23"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="telnet" product="BusyBox telnetd" method="probed" conf="10"><cpe>cpe:/a:busybox:busybox</cpe></service></port>
+<port protocol="tcp" portid="8443"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="tcpwrapped" method="probed" conf="8"/></port>
+<port protocol="udp" portid="53"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="domain" method="table" conf="3"/></port>
+<port protocol="udp" portid="123"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="ntp" method="table" conf="3"/></port>
+<port protocol="udp" portid="161"><state state="open" reason="udp-response" reason_ttl="64"/><service name="snmp" product="SNMPv1 server" extrainfo="public" method="probed" conf="10"/><script id="snmp-sysdescr" output="Linux router 2.6.36 #1 Thu Mar 3 12:00:00 CST 2016 mips"/></port>
+</ports>
+<times srtt="455" rttvar="210" to="100000"/>
+</host>
+<runstats><finished time="1794883239" timestr="Tue Nov 17 10:40:39 2026" summary="Nmap done at Tue Nov 17 10:40:39 2026; 256 IP addresses (5 hosts up) scanned in 1731.42 seconds" elapsed="1731.42" exit="success"/><hosts up="5" down="251" total="256"/>
+</runstats>
+</nmaprun>

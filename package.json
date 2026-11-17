@@ -1,0 +1,69 @@
+{
+  "name": "dsh-scan-triage",
+  "version": "0.1.0",
+  "description": "安全研判 Agent 预设 + scan-triage 技能：研判 Nmap 等扫描结果、漏洞报告、告警与日志，给出风险分级、误报甄别、处置与复测建议。仅限防御用途。",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "security",
+    "blue-team",
+    "nmap",
+    "vulnerability",
+    "triage",
+    "skill",
+    "agent-preset"
+  ],
+  "license": "MIT",
+  "author": "zv",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "icon": "icon.svg",
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "skills",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=24.9.0",
+    "dsh": ">=0.2.2-0 <0.3.0-0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh": ">=0.2.2-0 <0.3.0-0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh": {
+      "optional": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZemonVunter/dsh-scan-triage.git"
+  },
+  "homepage": "https://github.com/ZemonVunter/dsh-scan-triage#readme",
+  "bugs": {
+    "url": "https://github.com/ZemonVunter/dsh-scan-triage/issues"
+  },
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "capabilities": [
+      "fs:read"
+    ],
+    "labels": [
+      "prompt-modification"
+    ]
+  }
+}
